@@ -1,6 +1,7 @@
 import requests
 import json
 from src.api import Api
+from src.vacancy import Vacancy
 
 
 class HeadHunterAPI(Api):
@@ -8,11 +9,11 @@ class HeadHunterAPI(Api):
     def __init__(self):
         pass
 
-    def get_vacancies(self, keyword):
+    def get_vacancies(self, job_title):
         """Запрос к API HH"""
 
         params = {
-            'text': keyword,
+            'text': job_title,
             'area': 1,
             'page': 0,
             'per_page': 50
@@ -30,12 +31,12 @@ class HeadHunterAPI(Api):
         for obj in js_obj['items']:
             salary = obj.get('salary') or {}
             all_vacancy.append(Vacancy(**{
-                'name': obj['name'],
+                'title': obj['name'],
                 'salary_from': salary.get('from', 0),
                 'salary_to': salary.get('to', 0),
-                'company': obj['company']['name'],
+                'employer': obj['employer']['name'],
                 'url': obj['url'],
-                'description': obj['snippet']['description']
+                'req': obj['snippet']['requirement']
             }))
 
         return all_vacancy

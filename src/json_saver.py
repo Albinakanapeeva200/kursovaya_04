@@ -40,7 +40,7 @@ class JSONSaver:
     def top_salary_vacancy(obj):
         with open('vacancy.json', mode='r', encoding='utf8') as file:
             obj = json.load(file)
-            object_ = sorted(obj, key=lambda salary: salary['З/п до'])
+            object_ = sorted(obj, key=lambda x: x[0], reverse=True)
             print(object_)
 
 
