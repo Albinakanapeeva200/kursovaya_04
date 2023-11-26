@@ -29,17 +29,20 @@ class HeadHunterAPI(Api):
 
         all_vacancy = []
         for obj in js_obj['items']:
-            salary = obj.get('salary') or {}
-            all_vacancy.append(Vacancy(**{
-                'title': obj['name'],
-                'salary_from': salary.get('from', 0),
-                'salary_to': salary.get('to', 0),
-                'employer': obj['employer']['name'],
-                'url': obj['url'],
-                'req': obj['snippet']['requirement']
-            }))
+            if not obj['salary']['from'] or not obj['salary']['to']:
+                continue
+            else:
+                salary = obj.get('salary')
+                all_vacancy.append(Vacancy(**{
+                    'title': obj['name'],
+                    'salary_from': salary.get('from', 0),
+                    'salary_to': salary.get('to', 0),
+                    'employer': obj['employer']['name'],
+                    'url': obj['url'],
+                    'req': obj['snippet']['requirement']
+                }))
 
-        return all_vacancy
+            return all_vacancy
 
 
 if __name__ == "__main__":
