@@ -29,7 +29,7 @@ class HeadHunterAPI(Api):
 
         all_vacancy = []
         for obj in js_obj['items']:
-            if not obj['salary']['from'] or not obj['salary']['to']:
+            if not obj['salary']['from'] is None or obj['salary']['to'] is None:
                 continue
             else:
                 salary = obj.get('salary')

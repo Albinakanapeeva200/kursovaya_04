@@ -14,10 +14,9 @@ def user_interaction():
     if user_input == platforms[0]:
         client = HeadHunterAPI()
 
-        search_query = input('Вы выбрали HH \nВведите поисковый запрос: \n')
+        search_query = input('Вы выбрали HH ')
         hh_vacancy = client.get_vacancies(search_query)
         JSONSaver().add_vacancy(hh_vacancy)
-        print('Сформирован список вакансий \n')
 
         user_ch = input('Введите вакансию: \n')
         JSONSaver().get_info(user_ch)
@@ -31,10 +30,9 @@ def user_interaction():
 
     elif user_input == platforms[1]:
         client = SuperJobAPI()
-        search_query = input("Вы выбрали SJ \nВведите поисковый запрос: \n")
+        search_query = input("Вы выбрали SJ ")
         sj_vacancy = client.get_vacancies(search_query)
         JSONSaver().add_vacancy(sj_vacancy)
-        print('Сформирован список вакансий \n')
 
         user_ch = input('Введите вакансию: \n')
         JSONSaver().get_info(user_ch)
